@@ -1,0 +1,23 @@
+app_accueil:
+    resource: AppBundle\Controller\MonitoringController
+    type: rest
+
+app_unite:
+    resource: app.unite
+    type: sylius.api
+    prefix: /api
+
+app_type_indicateur:
+    resource: app.type.indicateur
+    type: sylius.api
+    prefix: /api
+
+app_indicateur:
+    resource: app.indicateur
+    type: sylius.api
+    prefix: /api
+
+app_detail_indicateur:
+    resource: app.detail.indicateur
+    type: sylius.api
+    prefix: /api

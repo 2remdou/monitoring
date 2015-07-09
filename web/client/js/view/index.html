@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <title>Le top des indicateurs</title>
+    <link rel="stylesheet" href="web/client/bower_components/bootstrap/dist/css/bootstrap.css"/>
+<!--
+    <link rel="stylesheet" href="/../../bower_components/jquery-ui/themes/flick/jquery-ui.min.css"/>
+    &lt;!&ndash;<link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css"/>&ndash;&gt;
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/indicateur.css">
+    <script src="/../../bower_components/angular/angular.min.js"></script>
+-->
+</head>
+<body ng-app="app">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button tgype="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">DNSI</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#/unites">Unite <span class="sr-only">(current)</span></a></li>
+                <li><a href="#/type-indicateurs">Type Indicateur</a></li>
+                <li><a href="#/hotes">Hote</a></li>
+                <li><a href="#/indicateurs">Indicateur</a></li>
+                <li><a href="#/detail-indicateurs">Details</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Connexion</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<ind-message></ind-message>
+<div ng-view></div>
+<!--
+<script src="../polyfill.js"></script>
+<script src="bundles/fosjsrouting/js/router.js"></script>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/moment/moment.js"></script>
+&lt;!&ndash;<script src="bower_components/angular-ui-select/dist/select.min.js"></script>&ndash;&gt;
+<script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="client/js/fos_js_routes.js"></script>
+<script src="../../../bower_components/restangular/src/restangular.js"></script>
+<script src="../../../bower_components/lodash/dist/lodash.min.js"></script>
+<script src="../../../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../../../bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="../../../bower_components/checklist-model/checklist-model.js"></script>
+<script src="../config.js"></script>
+<script src="../app.js"></script>
+
+&lt;!&ndash;-----------------------FILTER-------------------------&ndash;&gt;
+<script src="../filter/separatorNumber.js"></script>
+
+&lt;!&ndash;-----------------------SERVICES-------------------------&ndash;&gt;
+<script src="../service/uniteFactory.js"></script>
+<script src="../service/hoteFactory.js"></script>
+<script src="../service/messageFactory.js"></script>
+<script src="../service/typeIndicateurFactory.js"></script>
+<script src="../service/indicateurFactory.js"></script>
+<script src="../service/detailIndicateurFactory.js"></script>
+
+&lt;!&ndash;--------------------CONTROLLERS------------------------&ndash;&gt;
+<script src="../controller/UniteController.js"></script>
+<script src="../controller/HoteController.js"></script>
+<script src="../controller/TypeIndicateurController.js"></script>
+<script src="../controller/IndicateurController.js"></script>
+<script src="../controller/DetailIndicateurController.js"></script>
+
+
+&lt;!&ndash;-----------------------DIRECTIVES-------------------------&ndash;&gt;
+<script src="../directive/loading.js"></script>
+<script src="../directive/message.js"></script>
+<script src="../directive/deleteModal.js"></script>
+<script src="../directive/datepicker.js"></script>
+-->
+</body>
+</html>

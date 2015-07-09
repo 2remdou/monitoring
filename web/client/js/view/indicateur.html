@@ -1,0 +1,70 @@
+<form class="form-horizontal" ng-submit="saveIndicateur(method)" style="padding-left:20%;">
+    <fieldset>
+        <legend>Liste des indicateurs</legend>
+        <div class="form-group">
+            <div class="col-lg-3">
+                <label for="libelleIndicateur" class="control-label">Libelle de l'indicateur</label>
+                <input type="text" class="form-control" id="libelleIndicateur" ng-model="newIndicateur.libelleIndicateur" placeholder="Le libelle (Ex:Espace dbdev ...)">
+
+                <label for="typeIndicateur" class="control-label">Type Indicateur</label>
+                <select class="form-control" id="typeIndicateur" ng-model="newIndicateur.typeIndicateur"
+                        ng-options="typeIndicateur.libelleTypeIndicateur
+                         for typeIndicateur in typeIndicateurs track by typeIndicateur.id">
+                </select>
+
+                <label for="unite" class="control-label">Unite</label>
+                <select class="form-control" id="unite" ng-model="newIndicateur.unite"
+                        ng-options="unite.libelleUnite
+                         for unite in unites track by unite.id">
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <h5>HOTE</h5>
+                <div  id="hote">
+                    <div ng-repeat="hote in hotes">
+                        <input type="checkbox"
+                               ng-model="hote.selected"
+                               ng-change="selectedHote(hote)"
+                                />
+                        {{hote.libelleHote}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <button type="reset" ng-click="annuler()" class="btn btn-default">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>N°</th>
+        <th>Id</th>
+        <th>Libelle Indicateur</th>
+        <th>Type Indicateur</th>
+        <th>Unite</th>
+        <th>Hote</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <ind-loading valeur-loading="loading">
+        <tr ng-repeat="indicateur in indicateurs" >
+            <td>{{$index+1}}</td>
+            <td>{{indicateur.id}}</td>
+            <td>{{indicateur.libelleIndicateur}}</td>
+            <td>{{indicateur.typeIndicateur.libelleTypeIndicateur}}</td>
+            <td>{{indicateur.unite.libelleUnite}}</td>
+            <td>
+                <div ng-repeat="hote in indicateur.hotes">{{hote.libelleHote}}</div>
+            </td>
+
+            <td><button class="btn btn-info" ng-click="editIndicateur($index)">Modifier</button></td>
+            <td><button class="btn btn-info" ng-click="deleteIndicateur(indicateur)">Supprimer</button></td>
+        </tr>
+    </ind-loading>
+    </tbody>
+</table>

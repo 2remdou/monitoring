@@ -1,0 +1,21 @@
+sylius_resource:
+    settings:
+        paginate: false
+    resources:
+        app.unite:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Unite
+        app.type.indicateur:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\TypeIndicateur
+        app.indicateur:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Indicateur
+        app.detail.indicateur:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\DetailIndicateur
+
