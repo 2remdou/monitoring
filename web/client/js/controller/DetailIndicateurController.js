@@ -1,13 +1,13 @@
 /**
  * Created by delphinsagno on 15/03/15.
  */
-app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope','indicateurFactory','detailIndicateurFactory','dateFilter',
-    function($scope,Restangular,$rootScope,indicateurFactory,detailIndicateurFactory,dateFilter){
+app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope','Indicateurs','DetailIndicateurs','dateFilter',
+    function($scope,Restangular,$rootScope,Indicateurs,DetailIndicateurs,dateFilter){
                 intercepError(Restangular,$rootScope);
                 $rootScope.$broadcast('hideMessage') ;
                 $scope.all = function(){
                     $rootScope.loading=true;
-                    detailIndicateurFactory.getList().then(function(details){
+                    DetailIndicateurs.getList().then(function(details){
                         $scope.details = details;
                         if(details.length===0){
                             $rootScope.$broadcast('showMessage',
@@ -22,7 +22,7 @@ app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope'
 
                 $scope.all();
 
-                indicateurFactory.getList().then(function(indicateurs){
+        Indicateurs.getList().then(function(indicateurs){
                     $scope.indicateurs = indicateurs;
                 });
 

@@ -5,7 +5,7 @@
 app.directive('indLoading',function($rootScope){
    return {
        restrict : 'EA',
-       templateUrl: 'js/view/loading.html',
+       templateUrl: 'client/js/view/loading.html',
        transclude : true,
        scope : {
            loading : "=valeurLoading"

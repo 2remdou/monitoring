@@ -3,7 +3,7 @@
 # mod_rewrite). Additionally, this reduces the matching process for the
 # start page (path "/") because otherwise Apache will apply the rewriting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
-DirectoryIndex index.html
+DirectoryIndex client/js/view/index.html
 #DirectoryIndex app.php
 
 # Disabling MultiViews prevents unwanted negotiation, e.g. "/app" should not resolve

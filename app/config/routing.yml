@@ -7,17 +7,67 @@ app_unite:
     type: sylius.api
     prefix: /api
 
-app_type_indicateur:
-    resource: app.type.indicateur
-    type: sylius.api
-    prefix: /api
+app_type_indicateur_index:
+    path: /api/type-indicateurs/
+    methods: ['GET']
+    defaults:
+        _controller: app.controller.type:indexAction
+
+app_type_indicateur_show:
+    path: /api/type-indicateurs/{id}
+    methods: ['GET']
+    defaults:
+        _controller: app.controller.type:showAction
+
+app_type_indicateur_create:
+    path: /api/type-indicateurs/
+    methods: ['POST']
+    defaults:
+        _controller: app.controller.type:createAction
+
+app_type_indicateur_update:
+    path: /api/type-indicateurs/{id}
+    methods: ['PUT','PATCH']
+    defaults:
+        _controller: app.controller.type:updateAction
+
+app_type_indicateur_delete:
+    path: /api/type-indicateurs/{id}
+    methods: ['DELETE']
+    defaults:
+        _controller: app.controller.type:deleteAction
 
 app_indicateur:
     resource: app.indicateur
     type: sylius.api
     prefix: /api
 
-app_detail_indicateur:
-    resource: app.detail.indicateur
-    type: sylius.api
-    prefix: /api
+app_detail_indicateur_index:
+    path: /api/detail-indicateurs/
+    methods: ['GET']
+    defaults:
+        _controller: app.controller.detail:indexAction
+
+app_detail_indicateur_show:
+    path: /api/detail-indicateurs/{id}
+    methods: ['GET']
+    defaults:
+        _controller: app.controller.detail:showAction
+
+app_detail_indicateur_create:
+    path: /api/detail-indicateurs/
+    methods: ['POST']
+    defaults:
+        _controller: app.controller.detail:createAction
+
+app_detail_indicateur_update:
+    path: /api/detail-indicateurs/{id}
+    methods: ['PUT|PATCH']
+    defaults:
+        _controller: app.controller.detail:updateAction
+
+app_detail_indicateur_delete:
+    path: /api/detail-indicateurs/{id}
+    methods: ['DELETE']
+    defaults:
+        _controller: app.controller.detail:deleteAction

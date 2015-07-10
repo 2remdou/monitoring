@@ -1,14 +1,14 @@
 /**
  * Created by delphinsagno on 15/03/15.
  */
-app.controller('IndicateurController',['$scope','Restangular','$rootScope','indicateurFactory','typeIndicateurFactory','hoteFactory','uniteFactory',
-    function($scope,Restangular,$rootScope,indicateurFactory,typeIndicateurFactory,hoteFactory,uniteFactory){
+app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indicateurs','TypeIndicateurs','Unites',
+    function($scope,Restangular,$rootScope,Indicateurs,TypeIndicateurs,Unites){
                 intercepError(Restangular,$rootScope);
 
                 $rootScope.$broadcast('hideMessage') ;
                 $scope.all = function(){
                     $rootScope.loading=true;
-                        indicateurFactory.getList().then(function(indicateurs){
+                        Indicateurs.getList().then(function(indicateurs){
                             $scope.indicateurs = indicateurs;
                             if(indicateurs.length===0){
                                 $rootScope.$broadcast('showMessage',
@@ -22,15 +22,13 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','indi
 
                 $scope.all();
 
-                typeIndicateurFactory.getList().then(function(typeIndicateurs){
+                TypeIndicateurs.getList().then(function(typeIndicateurs){
                     $scope.typeIndicateurs = typeIndicateurs;
                 });
 
-                hoteFactory.getList().then(function(hote){
-                    $scope.hotes = hote;
-                });
 
-                uniteFactory.getList().then(function(unites){
+
+                Unites.getList().then(function(unites){
                     $scope.unites = unites;
                 })
 
@@ -47,7 +45,7 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','indi
                         $scope.method = "POST";
                     }
                     else{
-                       typeIndicateurFactory.one($scope.newIndicateur.typeIndicateur.id)
+                       TypeIndicateurs.one($scope.newIndicateur.typeIndicateur.id)
                            .one(getRoute('get_unites'),$scope.newIndicateur.unite.id)
                            .post('indicateurs',$scope.newIndicateur)
                            .then(function(values){

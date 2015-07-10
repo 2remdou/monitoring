@@ -4,7 +4,7 @@
 app.directive('indMessage',['messageFactory',function(){
     return {
         restrict: 'E',
-        templateUrl: 'js/view/message.html',
+        templateUrl: 'client/js/view/message.html',
         scope : {
 
         },
