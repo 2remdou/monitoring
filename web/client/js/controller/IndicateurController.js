@@ -27,13 +27,13 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                 });
 
 
-
                 Unites.getList().then(function(unites){
                     $scope.unites = unites;
                 })
 
                 $scope.newIndicateur = {};
                 $scope.saveIndicateur = function(){
+                    var ind = Restangular.copy($scope.newIndicateur);
                     if(!controlFields()) return;
                     if($scope.method === "PUT"){
                         $scope.newIndicateur.put().then(function(values){
@@ -45,10 +45,7 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                         $scope.method = "POST";
                     }
                     else{
-                       TypeIndicateurs.one($scope.newIndicateur.typeIndicateur.id)
-                           .one(getRoute('get_unites'),$scope.newIndicateur.unite.id)
-                           .post('indicateurs',$scope.newIndicateur)
-                           .then(function(values){
+                        Indicateurs.post(ind).then(function(values){
                            $scope.all();
                            $scope.indicateurs.push($scope.newIndicateur);
                            $scope.newIndicateur = {};
@@ -65,18 +62,6 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                 $scope.editIndicateur = function(index){
                     $scope.newIndicateur = {};
                     $scope.newIndicateur = $scope.indicateurs[index];
-                    //on deselectionne tout
-                    angular.forEach($scope.hotes,function(hoteAll){
-                            hoteAll.selected=false;
-                    });
-                    //on reselectionne en fonction de l'indicateur selectionne
-                    angular.forEach($scope.newIndicateur.hotes,function(hoteSelect){
-                        angular.forEach($scope.hotes,function(hoteAll){
-                            if(hoteSelect.id===hoteAll.id){
-                                hoteAll.selected=true;
-                            }
-                        });
-                    });
                     $scope.method = "PUT"
                 };
 
@@ -88,7 +73,7 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                             typeAlert:"success"
                         });
                         var index = $scope.indicateurs.indexOf(indicateur);
-                        $scope.indicateurs.splice(index,1);
+                        if(index>-1) $scope.indicateurs.splice(index,1);
                     });
                 };
 
@@ -105,15 +90,6 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                         });
                         return false;
                     }
-/*
-                    if(!$scope.newIndicateur.hote){
-                        $rootScope.$broadcast('showMessage',{
-                            messages:["Veuillez selectionner un hote"],
-                            typeAlert:"danger"
-                        });
-                        return false;
-                    }
-*/
                     return true;
                 }
 
@@ -128,30 +104,5 @@ app.controller('IndicateurController',['$scope','Restangular','$rootScope','Indi
                             })
                     });
                     $scope.indicateurs = indicateurs;
-                }
-                $scope.selectedHote = function(hote){
-                    var trouve=false;
-                    var pos=undefined;
-                    //creer un tab vide pour les hotes
-                   if(typeof $scope.newIndicateur.hotes==="undefined"){
-                       $scope.newIndicateur.hotes=[];
-                   }
-                    angular.forEach($scope.newIndicateur.hotes,function(value,index){
-                        if(value.id===hote.id){
-                            trouve = true;
-                            pos=index;
-                        }
-                    });
-                    //l'hote selectionne n'existe pas dans l'indicateur selectionne
-                   if(hote.selected){
-                       if(!trouve){
-                           $scope.newIndicateur.hotes.push(hote);
-                       }
-                    }
-                    else{ //l'hote deselectionne existe dans l'indicateur selectionne
-                        if(trouve){
-                            $scope.newIndicateur.hotes.splice(pos,1);
-                        }
-                    }
                 }
 }]);

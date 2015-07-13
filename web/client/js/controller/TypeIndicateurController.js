@@ -23,8 +23,7 @@ app.controller('TypeIndicateurController',['$scope','Restangular','$rootScope','
         $scope.newTypeIndicateur = {};
         $scope.saveTypeIndicateur = function(){
             if($scope.method === "PUT"){
-                $scope.newTypeIndicateur.put({id:$scope.newTypeIndicateur.id}).then(function(typeInd){
-                    console.log(typeInd);
+                $scope.newTypeIndicateur.put().then(function(typeInd){
                     $scope.newTypeIndicateur = {};
                     $rootScope.$broadcast('showMessage',
                         {messages:["Modification effectuée"],
@@ -59,7 +58,7 @@ app.controller('TypeIndicateurController',['$scope','Restangular','$rootScope','
                     typeAlert:"success"
                 });
                 var index = $scope.typeIndicateurs.indexOf(typeIndicateur);
-                $scope.typeIndicateurs.splice(index,1);
+                if(index>-1) $scope.typeIndicateurs.splice(index,1);
             });
         }
 

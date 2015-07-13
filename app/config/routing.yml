@@ -2,6 +2,12 @@ app_accueil:
     resource: AppBundle\Controller\MonitoringController
     type: rest
 
+app_unite_create:
+    path: /api/unites
+    methods: ['POST']
+    defaults:
+        _controller: app.controller.unite:createAction
+
 app_unite:
     resource: app.unite
     type: sylius.api
@@ -20,7 +26,7 @@ app_type_indicateur_show:
         _controller: app.controller.type:showAction
 
 app_type_indicateur_create:
-    path: /api/type-indicateurs/
+    path: /api/type-indicateurs
     methods: ['POST']
     defaults:
         _controller: app.controller.type:createAction
@@ -42,6 +48,12 @@ app_indicateur:
     type: sylius.api
     prefix: /api
 
+app_indicateur_create:
+    path: /api/indicateurs
+    methods: ['POST']
+    defaults:
+        _controller: app.controller.indicateur:createAction
+
 app_detail_indicateur_index:
     path: /api/detail-indicateurs/
     methods: ['GET']
@@ -55,7 +67,7 @@ app_detail_indicateur_show:
         _controller: app.controller.detail:showAction
 
 app_detail_indicateur_create:
-    path: /api/detail-indicateurs/
+    path: /api/detail-indicateurs
     methods: ['POST']
     defaults:
         _controller: app.controller.detail:createAction

@@ -17,13 +17,25 @@ function intercepError(Restangular,$rootScope){
         var m = [];
 
         if(response.data){
-            angular.forEach(response.data.errors.errors,function(value){
-                m.push(value);
-            });
-            $rootScope.$broadcast('showMessage',{
-                messages : m,
-                typeAlert: "danger"
-            })
+            if(response.data.message){
+                m.push(response.data.message);
+            }
+            if(response.data.errors){
+                angular.forEach(response.data.errors.errors,function(value){
+                    m.push(value);
+                });
+            }
+
         }
+        if(m.length===0)
+        {
+            m.push('Ouuppss! quelsques choses a été cassé !!!!!');
+            console.log(m);
+        }
+        $rootScope.$broadcast('showMessage',{
+            messages : m,
+            typeAlert: "danger"
+        });
+
     });
 }

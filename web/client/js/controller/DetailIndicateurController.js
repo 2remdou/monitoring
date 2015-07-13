@@ -26,17 +26,8 @@ app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope'
                     $scope.indicateurs = indicateurs;
                 });
 
-/*
-                uniteFactory.getList().then(function(unites){
-                    $scope.unites = unites;
-                });
-*/
-
-
-
                 $scope.newDetail = {};
                 $scope.saveDetail = function(){
-                    console.log($scope.newDetail.dateDetail);
                     if(!controlFields()) return;
                     if($scope.method === "PUT"){
                         $scope.newIndicateur.put().then(function(values){
@@ -51,8 +42,7 @@ app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope'
                     else{
                         $scope.newDetail.dateDetail = dateFilter($scope.newDetail.dateDetail,'yyyy-M-d h:mm:ss');
                        //uniteFactory.one($scope.newDetail.unite.id).one(getRoute('get_indicateurs'),$scope.newDetail.indicateur.id).post('details',$scope.newDetail)
-                       indicateurFactory.one($scope.newDetail.indicateur.id).post('details',$scope.newDetail)
-                           .then(function(values){
+                        DetailIndicateurs.post($scope.newDetail).then(function(values){
                            $scope.details.push($scope.newDetail);
                            $scope.newDetail = {};
                            $rootScope.$broadcast('showMessage',{
@@ -80,74 +70,11 @@ app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope'
                             typeAlert:"success"
                         });
                         var index = $scope.indicateurs.indexOf(indicateur);
-                        $scope.indicateurs.splice(index,1);
+                        if(index>-1) $scope.indicateurs.splice(index,1);
                     });
                 }
 
-                $scope.changeIndicateur = function(){
-                    $rootScope.loading=true;
-                    $scope.newDetail.indicateur.getList(getRoute('get_detail_indicateurs'))
-                        .then(function(details){
-                        $scope.details = details;
-                        if(details.length===0){
-                            $rootScope.$broadcast('showMessage',
-                                {messages:["Aucun detail pour cet indicateur"],
-                                    typeAlert:"info"
-                                }) ;
-                        }
-                        $rootScope.loading=false;
-                    });
 
-                };
-
-/*
-                $scope.changeUnite = function(){
-                    $rootScope.loading=true;
-                    $scope.newDetail.unite.getList(getRoute('get_detail_indicateurs'))
-                        .then(function(details){
-                            $scope.details = details;
-                            if(details.length===0){
-                                $rootScope.$broadcast('showMessage',
-                                    {messages:["Aucun detail pour cette unite"],
-                                        typeAlert:"info"
-                                    }) ;
-                            }
-                            $rootScope.loading=false;
-                        });
-
-                };
-*/
-
-                $scope.filtre = function(){
-                    $rootScope.$broadcast('hideMessage')
-                  if($scope.newDetail.indicateur && !$scope.newDetail.unite){
-                        $scope.changeIndicateur();
-                  }
-/*
-                  else if($scope.newDetail.unite && !$scope.newDetail.indicateur){
-                      $scope.changeUnite();
-                  }
-*/
-                  else if($scope.newDetail.indicateur){
-                      //uniteFactory.one($scope.newDetail.unite.id).one(getRoute('get_indicateurs'),$scope.newDetail.indicateur.id).getList(getRoute('get_detail_indicateurs'))
-                      indicateurFactory.one($scope.newDetail.indicateur.id).getList(getRoute('get_detail_indicateurs'))
-                          .then(function(details){
-                              $scope.details = details;
-                              if(details.length===0){
-                                  $rootScope.$broadcast('showMessage',
-                                      {messages:["Aucun detail correspondant à ces critères"],
-                                          typeAlert:"info"
-                                      }) ;
-                              }
-                              $rootScope.loading=false;
-
-                          });
-
-                  }
-                    else{
-                      $scope.all();
-                  }
-                };
                 function controlFields(){
                     if(!$scope.newDetail.indicateur){
                         $rootScope.$broadcast('showMessage',{
@@ -156,15 +83,6 @@ app.controller('DetailIndicateurController',['$scope','Restangular','$rootScope'
                         });
                         return false;
                     }
-/*
-                    if(!$scope.newDetail.unite){
-                        $rootScope.$broadcast('showMessage',{
-                            messages:["Veuillez selectionner une unite"],
-                            typeAlert:"danger"
-                        });
-                        return false;
-                    }
-*/
                     if(!$scope.newDetail.valeur){
                         $rootScope.$broadcast('showMessage',{
                             messages:["Veuillez fournir une valeur"],

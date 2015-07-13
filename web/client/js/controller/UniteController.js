@@ -21,6 +21,7 @@ app.controller('UniteController',['$scope','Restangular','$rootScope','Unites',
         $scope.newUnite = {};
         $scope.saveUnite = function(){
             if($scope.method === "PUT"){
+                console.log($scope.newUnite);
                 $scope.newUnite.put().then(function(u){
                     $scope.newUnite = {};
                     $rootScope.$broadcast('showMessage',
@@ -51,16 +52,15 @@ app.controller('UniteController',['$scope','Restangular','$rootScope','Unites',
         $scope.deleteUnite = function(unite){
             $scope.unite=unite;
             console.log($scope.unite);
-/*
             unite.remove().then(function(u){
                 $rootScope.$broadcast('showMessage',{
                     messages:["Suppression effectuée"],
                     typeAlert:"success"
                 });
                 var index = $scope.unites.indexOf(unite);
-                $scope.unites.splice(index,1);
+                if(index> -1) $scope.unites.splice(index,1);
 
-            });*/
+            });
         }
 
         $scope.annuler = function(){
